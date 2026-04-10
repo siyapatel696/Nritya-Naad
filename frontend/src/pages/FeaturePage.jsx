@@ -2,6 +2,8 @@ import { useParams, Link } from "react-router-dom";
 import features from "../data/features.json";
 import Navbar from "../components/Navbar";
 import UserStories from "../components/UserStories";
+import DanceGallery from "../components/DanceGallery";
+import AcademyListing from "../components/AcademyListing";
 
 const FEATURE_THEMES = {
   mudra:      { color: "#C2185B", bg: "rgba(194,24,91,0.08)", gradient: "linear-gradient(135deg, #C2185B, #880E4F)", icon: "🤲" },
@@ -26,12 +28,13 @@ export default function FeaturePage() {
   const { id } = useParams();
   const feature = features.find((f) => f.id === id);
   const theme = FEATURE_THEMES[id] || FEATURE_THEMES.mudra;
+  const contentMaxWidth = id === "gallery" ? "1200px" : id === "academy" ? "900px" : "860px";
 
   return (
     <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column" }}>
       <Navbar />
 
-      <div style={{ padding: "48px 48px 80px", maxWidth: "860px", margin: "0 auto", width: "100%" }}>
+      <div style={{ padding: "48px 48px 80px", maxWidth: contentMaxWidth, margin: "0 auto", width: "100%" }}>
 
         {/* Breadcrumb */}
         <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "36px" }}>
@@ -99,13 +102,34 @@ export default function FeaturePage() {
             lineHeight: 1.7,
             fontWeight: 300,
           }}>
-            This is your dedicated workspace for the <strong style={{ color: theme.color, fontWeight: 500 }}>{feature?.name}</strong> module.
-            Build your feature UI and logic here, with full access to the NrityaNaad design system and theme.
+            {id === "gallery" ? (
+              <>
+                Curated imagery and short notes on the classical dance traditions of India — part of the{" "}
+                <strong style={{ color: theme.color, fontWeight: 500 }}>{feature?.name}</strong> module in NrityaNaad.
+              </>
+            ) : id === "academy" ? (
+              <>
+                Discover dance and music <strong style={{ color: theme.color, fontWeight: 500 }}>academies</strong> — filter by city, call, or open maps.
+              </>
+            ) : (
+              <>
+                This is your dedicated workspace for the <strong style={{ color: theme.color, fontWeight: 500 }}>{feature?.name}</strong> module.
+                Build your feature UI and logic here, with full access to the NrityaNaad design system and theme.
+              </>
+            )}
           </p>
         </div>
 
         {/* Implementation area */}
-        {id === "stories" ? (
+        {id === "gallery" ? (
+          <div style={{ marginTop: "8px", width: "100%" }}>
+            <DanceGallery theme={theme} />
+          </div>
+        ) : id === "academy" ? (
+          <div style={{ marginTop: "8px", width: "100%" }}>
+            <AcademyListing theme={theme} />
+          </div>
+        ) : id === "stories" ? (
           <div style={{ marginTop: "32px", width: "100%", display: "flex", justifyContent: "center" }}>
             <UserStories theme={theme} />
           </div>

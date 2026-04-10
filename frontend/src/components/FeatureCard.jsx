@@ -20,8 +20,14 @@ const CARD_THEMES = {
 
 };
 
+const CARD_BLURBS = {
+  gallery: "Browse classical dance form imagery — eight Sangeet Natak Akademi traditions with notes and credits.",
+  academy: "Discover dance & music academies near you — search, filter by city, call or open maps.",
+};
+
 export default function FeatureCard({ feature }) {
   const theme = CARD_THEMES[feature.id] || CARD_THEMES.mudra;
+  const blurb = CARD_BLURBS[feature.id] || "Explore and experience this module of Indian classical arts";
 
   return (
     <Link to={`/feature/${feature.id}`} style={{ textDecoration: "none" }}>
@@ -91,7 +97,7 @@ export default function FeatureCard({ feature }) {
           lineHeight: 1.6,
           marginBottom: "20px",
         }}>
-          Explore and experience this module of Indian classical arts
+          {blurb}
         </p>
 
         {/* CTA line */}
