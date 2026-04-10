@@ -1,6 +1,7 @@
 import { useParams, Link } from "react-router-dom";
 import features from "../data/features.json";
 import Navbar from "../components/Navbar";
+import Academy from "../features/Academy";
 import UserStories from "../components/UserStories";
 
 const FEATURE_THEMES = {
@@ -22,10 +23,15 @@ const FEATURE_THEMES = {
   swaras:     { color: "#FF6B00", bg: "rgba(255,107,0,0.08)", gradient: "linear-gradient(135deg, #FF6B00, #E85D04)", icon: "🎶" },
 };
 
+const FEATURE_COMPONENTS = {
+  academy: Academy,
+};
+
 export default function FeaturePage() {
   const { id } = useParams();
   const feature = features.find((f) => f.id === id);
   const theme = FEATURE_THEMES[id] || FEATURE_THEMES.mudra;
+  const FeatureComponent = FEATURE_COMPONENTS[id] || null;
 
   return (
     <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column" }}>
@@ -104,6 +110,9 @@ export default function FeaturePage() {
           </p>
         </div>
 
+        {/* Feature content */}
+        {FeatureComponent ? (
+          <FeatureComponent />
         {/* Implementation area */}
         {id === "stories" ? (
           <div style={{ marginTop: "32px", width: "100%", display: "flex", justifyContent: "center" }}>
