@@ -1,3 +1,4 @@
+// src/pages/FeaturePage.jsx
 import { useParams, Link } from "react-router-dom";
 import features from "../data/features.json";
 import Navbar from "../components/Navbar";
@@ -6,6 +7,14 @@ import Upload from "../features/Upload";
 const FEATURE_COMPONENTS = {
   upload: Upload,
 };
+import IndiaMap from "../features/IndiaMap";
+
+const FEATURE_COMPONENTS = {
+  map: IndiaMap,
+};
+import Academy from "../features/Academy";
+import UserStories from "../components/UserStories";
+import EventListing from "../components/EventListing";  // ADD THIS IMPORT
 
 const FEATURE_THEMES = {
   mudra:      { color: "#C2185B", bg: "rgba(194,24,91,0.08)", gradient: "linear-gradient(135deg, #C2185B, #880E4F)", icon: "🤲" },
@@ -15,7 +24,7 @@ const FEATURE_THEMES = {
   stories:    { color: "#C2185B", bg: "rgba(194,24,91,0.08)", gradient: "linear-gradient(135deg, #C2185B, #880E4F)", icon: "📖" },
   map:        { color: "#00897B", bg: "rgba(0,137,123,0.08)", gradient: "linear-gradient(135deg, #00897B, #004D40)", icon: "🗺️" },
   upload:     { color: "#3949AB", bg: "rgba(57,73,171,0.08)", gradient: "linear-gradient(135deg, #3949AB, #1A237E)", icon: "🎬" },
-  danceform:       { color: "#FF6B00", bg: "rgba(255,107,0,0.08)", gradient: "linear-gradient(135deg, #FF6B00, #E85D04)", icon: "🎵" },
+  danceform:  { color: "#FF6B00", bg: "rgba(255,107,0,0.08)", gradient: "linear-gradient(135deg, #FF6B00, #E85D04)", icon: "🎵" },
   quiz:       { color: "#C2185B", bg: "rgba(194,24,91,0.08)", gradient: "linear-gradient(135deg, #C2185B, #880E4F)", icon: "❓" },
   event:      { color: "#00897B", bg: "rgba(0,137,123,0.08)", gradient: "linear-gradient(135deg, #00897B, #004D40)", icon: "📅" },
   reels:      { color: "#3949AB", bg: "rgba(57,73,171,0.08)", gradient: "linear-gradient(135deg, #3949AB, #1A237E)", icon: "🎞️" },
@@ -24,6 +33,10 @@ const FEATURE_THEMES = {
   karaoke:    { color: "#00897B", bg: "rgba(0,137,123,0.08)", gradient: "linear-gradient(135deg, #00897B, #004D40)", icon: "🎤" },
   visualizer: { color: "#3949AB", bg: "rgba(57,73,171,0.08)", gradient: "linear-gradient(135deg, #3949AB, #1A237E)", icon: "🌊" },
   swaras:     { color: "#FF6B00", bg: "rgba(255,107,0,0.08)", gradient: "linear-gradient(135deg, #FF6B00, #E85D04)", icon: "🎶" },
+};
+
+const FEATURE_COMPONENTS = {
+  academy: Academy,
 };
 
 export default function FeaturePage() {
@@ -112,6 +125,15 @@ export default function FeaturePage() {
         {/* Feature content */}
         {FeatureComponent ? (
           <FeatureComponent />
+        {/* Implementation area */}
+        {id === "stories" ? (
+          <div style={{ marginTop: "32px", width: "100%", display: "flex", justifyContent: "center" }}>
+            <UserStories theme={theme} />
+          </div>
+        ) : id === "event" ? (  // ADD THIS CONDITION
+          <div style={{ marginTop: "32px", width: "100%" }}>
+            <EventListing theme={theme} />
+          </div>
         ) : (
           <div style={{
             borderRadius: "24px",
