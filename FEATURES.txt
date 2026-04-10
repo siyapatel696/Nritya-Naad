@@ -13,7 +13,7 @@ Expected Output:
 
 2. Dance Forms Gallery
    Description:
-   Display images of different Indian dance forms provided in the project.
+   Display images of different Indian dance forms using the open images available on internet.
 
 Expected Output:
 
