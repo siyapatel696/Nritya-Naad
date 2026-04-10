@@ -1,9 +1,7 @@
 import { Link, useLocation } from "react-router-dom";
-import { useState } from "react";
 
 export default function Navbar() {
   const location = useLocation();
-  const [menuOpen, setMenuOpen] = useState(false);
 
   const navLinks = [
     { to: "/", label: "Home" },
